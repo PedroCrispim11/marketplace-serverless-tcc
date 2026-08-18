@@ -1,7 +1,6 @@
 terraform {
 
   cloud {
-
     organization = "pedro-crispim"
 
     workspaces {
