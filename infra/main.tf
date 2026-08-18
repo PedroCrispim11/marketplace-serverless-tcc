@@ -1,4 +1,13 @@
 terraform {
+    
+  cloud {
+    
+    organization = "pedro-crispim"
+
+    workspaces {
+      name = "marketplace-serverless-prod"
+    }
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
