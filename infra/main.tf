@@ -50,7 +50,8 @@ resource "aws_dynamodb_table" "marketplace_db" {
   }
 
   tags = {
-    Name = "Tabela-Core-Marketplace"
+    Name  = "Tabela-Core-Marketplace"
+    Teste = "Aprovacao-Manual-CICD" # <--- Adicione apenas esta linha
   }
 }
 
