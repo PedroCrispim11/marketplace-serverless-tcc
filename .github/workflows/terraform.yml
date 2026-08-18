@@ -1,20 +1,11 @@
 name: "Terraform CI/CD"
 
 on:
-  # O gatilho automático roda apenas o Plan
   push:
     branches:
       - main
     paths:
       - 'infra/**'
-  # O gatilho manual libera o botão de Apply
-  workflow_dispatch:
-    inputs:
-      confirm_apply:
-        description: 'ATENÇÃO: Deseja aplicar as mudanças na AWS (Terraform Apply)?'
-        required: true
-        type: boolean
-        default: false
 
 jobs:
   terraform:
@@ -42,7 +33,6 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -no-color
 
-      # Esta etapa AGORA SÓ RODA se você apertar o botão no GitHub e marcar "True"
       - name: Terraform Apply
-        if: github.event_name == 'workflow_dispatch' && inputs.confirm_apply == true
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
