@@ -44,5 +44,5 @@ jobs:
 
       # Esta etapa AGORA SÓ RODA se você apertar o botão no GitHub e marcar "True"
       - name: Terraform Apply
-        if: github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_apply == 'true'
+        if: github.event_name == 'workflow_dispatch' && inputs.confirm_apply == true
         run: terraform apply -auto-approve -input=false
