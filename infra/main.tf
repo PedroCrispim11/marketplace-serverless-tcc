@@ -108,13 +108,13 @@ resource "aws_iam_policy" "lambda_policy" {
         Effect = "Allow"
         Action = ["dynamodb:PutItem"]
 
-        Resource = aws_dynamodb_table.Marketplace-Core-Table.arn
+        Resource = aws_dynamodb_table.marketplace_db.arn
       },
       {
         Effect = "Allow"
         Action = ["sqs:SendMessage"]
 
-        Resource = aws_sqs_queue.marketplace-order-queue.arn
+        Resource = aws_sqs_queue.order_queue.arn
       },
       {
         Effect = "Allow"
@@ -148,8 +148,8 @@ resource "aws_lambda_function" "ingestao_api" {
   environment {
     variables = {
       # O Terraform vai descobrir o nome da tabela e fila e injetar aqui
-      DYNAMODB_TABLE = aws_dynamodb_table.Marketplace-Core-Table.name
-      SQS_QUEUE_URL  = aws_sqs_queue.marketplace-order-queue.url
+      DYNAMODB_TABLE = aws_dynamodb_table.marketplace_db.name
+      SQS_QUEUE_URL  = aws_sqs_queue.order_queue.url
     }
   }
 }
