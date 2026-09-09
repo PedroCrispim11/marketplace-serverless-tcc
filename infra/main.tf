@@ -107,13 +107,13 @@ resource "aws_iam_policy" "lambda_policy" {
       {
         Effect = "Allow"
         Action = ["dynamodb:PutItem"]
-        
-        Resource = aws_dynamodb_table.Marketplace-Core-Table.arn 
+
+        Resource = aws_dynamodb_table.Marketplace-Core-Table.arn
       },
       {
         Effect = "Allow"
         Action = ["sqs:SendMessage"]
-        
+
         Resource = aws_sqs_queue.marketplace-order-queue.arn
       },
       {
@@ -139,11 +139,11 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_attach" {
 resource "aws_lambda_function" "ingestao_api" {
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-  
-  function_name    = "IngestaoCotacoesAAA"
-  role             = aws_iam_role.lambda_exec_role.arn
-  handler          = "lambda_ingestao.lambda_handler"
-  runtime          = "python3.10" # Versão moderna e estável
+
+  function_name = "IngestaoCotacoesAAA"
+  role          = aws_iam_role.lambda_exec_role.arn
+  handler       = "lambda_ingestao.lambda_handler"
+  runtime       = "python3.10" # Versão moderna e estável
 
   environment {
     variables = {
